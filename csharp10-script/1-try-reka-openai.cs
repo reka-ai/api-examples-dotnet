@@ -19,7 +19,7 @@ var openAiClient = new OpenAIClient(new ApiKeyCredential(REKA_API_KEY), new Open
 
 var client = openAiClient.GetChatClient("reka-flash-research");
 
-string prompt = "Give me 3 nice, not crazy expensive, restaurants for a romantic dinner in Montreal";
+string prompt = "Suggest 3 tech event, with a AI focus, that I can attend in Canada";
 
 var completion = await client.CompleteChatAsync(
     new List<ChatMessage>

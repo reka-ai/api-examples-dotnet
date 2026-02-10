@@ -21,7 +21,7 @@ var requestPayload = new ChatRequest(
     {
         new ChatMessage(
             Role: "user",
-            Content: "Give me 3 nice, not crazy expensive, restaurants for a romantic dinner in New York city")
+            Content: "Suggest 3 tech event, with a AI focus, that I can attend in the United States")
     });
 
 var jsonPayload = JsonSerializer.Serialize(requestPayload, ChatRequestContext.Default.ChatRequest);

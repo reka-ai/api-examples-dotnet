@@ -18,6 +18,6 @@ IChatClient client = new ChatClient("reka-flash-research", new ApiKeyCredential(
     Endpoint = new Uri(baseUrl)
 }).AsIChatClient();
 
-string prompt = "Give me 3 nice, not crazy expensive, restaurants for a romantic dinner in Montreal";
+string prompt = "Suggest 3 tech event, with a AI focus, that I can attend in Canada";
 
 Console.WriteLine(await client.GetResponseAsync(prompt));
