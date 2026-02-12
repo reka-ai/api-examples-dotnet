@@ -24,6 +24,6 @@ AIAgent agent = new ChatClientAgent(chatClient,
     instructions: "You are a helpful assistant that recommends tech events.",
     name: "RekaAgent");
 
-string prompt = "Give me 5 major tech events happening in the USA between January and June 2026";
+string prompt = "Give me 3 major tech events happening in the USA between January and June 2026";
 
 Console.WriteLine(await agent.RunAsync(prompt));
