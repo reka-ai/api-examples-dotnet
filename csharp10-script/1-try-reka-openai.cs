@@ -9,15 +9,20 @@ using System.ClientModel;
 
 Env.Load();
 
-var REKA_API_KEY = Environment.GetEnvironmentVariable("REKA_API_KEY")!; 
-var baseUrl = "https://api.reka.ai/v1";
+// var API_KEY = Environment.GetEnvironmentVariable("REKA_API_KEY")!;
+// var baseUrl = "https://api.reka.ai/v1";
+// var modelName = "reka-flash-research";
 
-var openAiClient = new OpenAIClient(new ApiKeyCredential(REKA_API_KEY), new OpenAIClientOptions
+var API_KEY = Environment.GetEnvironmentVariable("OPENAI_API_KEY")!;
+var baseUrl = "https://api.openai.com/v1";
+var modelName = "gpt-5";
+
+var openAiClient = new OpenAIClient(new ApiKeyCredential(API_KEY), new OpenAIClientOptions
 {
     Endpoint = new Uri(baseUrl)
 });
 
-var client = openAiClient.GetChatClient("reka-flash-research");
+var client = openAiClient.GetChatClient(modelName);
 
 string prompt = "Suggest 3 tech event, with a AI focus, that I can attend in Canada";
 
