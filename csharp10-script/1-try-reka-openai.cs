@@ -17,6 +17,11 @@ var modelName = "reka-flash-research";
 // var baseUrl = "https://api.openai.com/v1";
 // var modelName = "gpt-5";
 
+// var API_KEY = "ollama";
+// var baseUrl = "http://127.0.0.1:11434/v1/";
+// var modelName = "llama3.1:8b";
+
+
 var openAiClient = new OpenAIClient(new ApiKeyCredential(API_KEY), new OpenAIClientOptions
 {
     Endpoint = new Uri(baseUrl)

@@ -14,7 +14,7 @@ var modelName = "reka-flash-research";
 
 // var API_KEY = "ollama";
 // var baseUrl = "http://127.0.0.1:11434/v1/chat/completions";
-// var modelName = "llama3:8b";
+// var modelName = "llama3.1:8b";
 
 using var httpClient = new HttpClient();
 httpClient.Timeout = Timeout.InfiniteTimeSpan;

@@ -16,7 +16,7 @@ Env.Load();
 
 // var API_KEY = "ollama";
 // var baseUrl = "http://127.0.0.1:11434/v1/";
-// var modelName = "llama3:8b";
+// var modelName = "llama3.1:8b";
 
 var API_KEY = Environment.GetEnvironmentVariable("OPENAI_API_KEY")!;
 var baseUrl = "https://api.openai.com/v1/";
