@@ -170,15 +170,17 @@ await process.WaitForExitAsync();
 
 ## Agenda
 
-- Context & setup
-- 7 demos: One task. Done 7 different ways.
-- Gotchas & wrap-up
+- ### Context & setup
+
+- ### 7 demos: One task. Done 7 different ways.
+
+- ### Gotchas & wrap-up
 
 ---
 
 <!-- _class: title -->
 
-## Not this talk
+## Disclaimer
 
 ~~"Is Copilot-generated C# actually good?"~~
 
@@ -186,7 +188,7 @@ await process.WaitForExitAsync();
 
 ~~"Which model is the best?"~~
 
-We're just here to make an API call. 6 times.
+We're just here to make an API call. 7 times.
 
 <div class="box-blue">
 
@@ -196,7 +198,7 @@ We're just here to make an API call. 6 times.
 
 ---
 
-## The prompt we'll use — 7 times
+## The prompt we'll use
 
 Same question. Different tool each time.
 
@@ -209,7 +211,9 @@ Same question. Different tool each time.
 **What we're comparing:**
 Setup complexity · Lines of code · Provider flexibility · Gotchas
 
-`github.com/fboucher/api-examples-dotnet`
+GitHub: `link.reka.ai/dotnet`
+
+![bottom-right](assets/QRcode_gh-reka-dotnet.jpg)
 
 ---
 
@@ -220,13 +224,12 @@ Setup complexity · Lines of code · Provider flexibility · Gotchas
 Each demo is a single `.cs` file — run it directly:
 
 ```bash
-$ dotnet run 1-try-openai.cs
+dotnet run 1-try-openai.cs
 ```
 
 <div class="box-blue">
 
 Zero project friction. Clone → add API key → run.
-*.NET 10 feature — your audience likely hasn't seen `#:package` yet!*
 
 </div>
 
@@ -238,7 +241,7 @@ Zero project friction. Clone → add API key → run.
 
 <div class="tool-card">
 <strong>OpenAI SDK for .NET</strong>
-Official SDK from OpenAI. Mirrors the API shape directly. Works with any OpenAI-compatible endpoint. 
+Official SDK from OpenAI. Mirrors the API shape directly. Works with any OpenAI-compatible endpoint.
 </div>
 
 <div class="tool-card">
@@ -359,14 +362,12 @@ Console.WriteLine(await agent.RunAsync(prompt));
 
 What the Agent SDK adds:
 
-- Named agent identity *(name: "RekaAgent")*
 - System instructions baked into the agent — not per-call
 - `RunAsync` — a higher-level concept than "send a message"
 
 <div class="box-orange">
 
-**Preview warning:** `1.0.0-preview.260209.1` — date-stamped versioning (Feb 9, 2026).
-Very new. 
+**Preview:** `1.0.0-preview.260209.1` — date-stamped versioning (Feb 9, 2026).
 
 </div>
 
@@ -397,18 +398,17 @@ public class TechEvent { public string Name, Location, Date { get; set; } }
 
 ## Demo 4 — Structured Output · Key points
 
-**Define a C# type → get typed data back. No string parsing.**
+- **Define a C# type → get typed data back. No string parsing.**
 
 <div class="box-orange">
 
 `#pragma warning disable IL2026, IL3050`
 
 `CreateJsonSchema()` uses reflection. In a trimmed/NativeAOT build this can break.
-The pragma is an honest acknowledgment — fine for most apps.
 
 </div>
 
-Provider portability — **the best "aha moment" of the talk:**
+- **Provider portability**
 
 ```csharp
 var baseUrl = "https://api.reka.ai/v1";         var model = "reka-flash-research";
@@ -417,7 +417,7 @@ var baseUrl = "https://api.reka.ai/v1";         var model = "reka-flash-research
 // var baseUrl = "http://localhost:11434/v1";     var model = "llama3.1:8b";
 ```
 
-<div class="box-green">3 variables. Same code. Any OpenAI-compatible provider.</div>
+<div class="box-green">Same code. Any OpenAI-compatible provider.</div>
 
 ---
 
@@ -448,7 +448,6 @@ Only works with OpenAI.
 
 ## Demo 5 — OpenAI Responses API · Key points
 
-**The outlier. A different API entirely — `ResponsesClient`, not `ChatClient`.**
 
 <div class="cols">
 
@@ -473,8 +472,6 @@ Only works with OpenAI.
 </div>
 
 </div>
-
-*Use when you need grounded, real-time answers and you're OK committing to OpenAI.*
 
 ---
 
@@ -505,7 +502,7 @@ Console.WriteLine(doc.RootElement
 
 <div class="box-red">
 
-**The most important gotcha of the whole talk:**
+**important gotcha:**
 
 `httpClient.Timeout = Timeout.InfiniteTimeSpan;`
 
@@ -537,7 +534,7 @@ var requestJson = new JsonObject
         new JsonObject { ["role"] = "user", ["content"] = prompt }
     ),
     ["response_format"] = GetResponseFormat(),   // JSON schema
-    ["research"] = new JsonObject                // Reka-specific
+    ["research"] = new JsonObject                
     {
         ["web_search"] = new JsonObject
         {
@@ -585,26 +582,33 @@ from working on anonymous types. Fix: use `JsonObject`/`JsonNode` instead — no
 
 ## Which one should I use?
 
-| Scenario | Recommendation | Demo |
-|---|---|---|
-| Just getting started | OpenAI SDK | #1 |
-| Want to swap providers later | Microsoft.Extensions.AI | #2 |
-| Building an agent / bot | MS AI Agent SDK | #3 |
-| Need typed / structured responses | Agent SDK + structured output | #4 |
-| Need web search (OpenAI OK) | OpenAI Responses API | #5 |
-| No SDK dependency / max portability | Raw HttpClient | #6 |
-| Web search + structured output (Reka) | Raw HttpClient (advanced) | #7 |
+<div class="cols">
 
----
+  <div class="box-green">
 
-<!-- _class: title -->
+  **OpenAI SDK**
+  - Just getting started
+  - OpenAI
 
-# Questions?
+  </div>
 
-`github.com/fboucher/api-examples-dotnet`
+  <div class="box-red">
 
-All 7 demos run with just a free API key.
-`dotnet run <filename>.cs`
+  **MS AI Agent SDK**
+  - Portability
+  - Documention
+  - Features
+
+  </div>
+
+</div>
+
+<div class="box-blue">
+
+**Raw HttpClient**
+ - Everything is possible, today
+
+</div>
 
 ---
 
@@ -631,7 +635,6 @@ All 7 demos run with just a free API key.
 fboucheros.com
 
 <div style="height: 10px;">&nbsp;</div>
-
 
 ![reka-logo](assets/reka_logo.png)
 reka.ai
